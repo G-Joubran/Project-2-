@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://dj2lawpft7x31"]
+
+[ext_resource type="Script" uid="uid://dvwpnqyowcmyd" path="res://sphere.gd" id="1_8pulh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8pulh"]
+friction = 0.56
+rough = true
+bounce = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8pulh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_veubm"]
+albedo_color = Color(0.407843, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_udds0"]
+
+[sub_resource type="Skin" id="Skin_5mvgh"]
+
+[node name="sphere" type="RigidBody3D"]
+mass = 37.298
+physics_material_override = SubResource("PhysicsMaterial_8pulh")
+gravity_scale = 1.305
+inertia = Vector3(2.7, 17.24, 206.9)
+script = ExtResource("1_8pulh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_8pulh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_veubm")
+mesh = SubResource("SphereMesh_udds0")
+skin = SubResource("Skin_5mvgh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1041.0
+offset_top = 585.0
+offset_right = 1095.0
+offset_bottom = 608.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "LIVES : 3"

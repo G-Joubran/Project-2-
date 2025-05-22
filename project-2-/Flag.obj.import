@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bxbraf6odbxsq"
+path="res://.godot/imported/Flag.obj-a629bec1e2cdb7cfcab92f3fb444f22a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Flag.obj-a629bec1e2cdb7cfcab92f3fb444f22a.mesh"]
+
+source_file="res://Flag.obj"
+dest_files=["res://.godot/imported/Flag.obj-a629bec1e2cdb7cfcab92f3fb444f22a.mesh", "res://.godot/imported/Flag.obj-a629bec1e2cdb7cfcab92f3fb444f22a.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

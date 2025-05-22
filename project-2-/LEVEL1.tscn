@@ -1,0 +1,147 @@
+[gd_scene load_steps=24 format=3 uid="uid://bdg7n4nwlh4wh"]
+
+[ext_resource type="PackedScene" uid="uid://g4iaa4m262p5" path="res://plane.tscn" id="1_a75kb"]
+[ext_resource type="PackedScene" uid="uid://dj2lawpft7x31" path="res://sphere.tscn" id="2_0p6mf"]
+[ext_resource type="Texture2D" uid="uid://b4djkhj2qk5xw" path="res://soccer_texture_img.png" id="2_55van"]
+[ext_resource type="ArrayMesh" uid="uid://d0bddiadc64sj" path="res://soccer_net.obj" id="3_s56ga"]
+[ext_resource type="Texture2D" uid="uid://cd7xc4jcena85" path="res://football field.jpg" id="4_0jgly"]
+[ext_resource type="PackedScene" uid="uid://c6ixa3k0k5kxy" path="res://endlevel_cube.tscn" id="4_s56ga"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3tav2"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_s56ga"]
+sky_material = SubResource("ProceduralSkyMaterial_3tav2")
+
+[sub_resource type="Environment" id="Environment_h05g5"]
+background_mode = 2
+sky = SubResource("Sky_s56ga")
+ambient_light_color = Color(0.728246, 0.411399, 0.184452, 1)
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s6wvq"]
+albedo_texture = ExtResource("2_55van")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_edy5h"]
+albedo_texture = ExtResource("4_0jgly")
+uv1_offset = Vector3(0.5, 0, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0p6mf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s56ga"]
+albedo_color = Color(1, 0.0823529, 0.278431, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s56ga"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jgly"]
+albedo_color = Color(0.686275, 0.776471, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gul82"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.37
+metallic_specular = 0.88
+roughness = 0.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3tav2"]
+albedo_color = Color(0.662745, 0.235294, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3tav2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h05g5"]
+albedo_color = Color(0.116333, 0.328193, 0.056921, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_55van"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h05g5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_55van"]
+albedo_color = Color(0.372549, 0.854902, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0jgly"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h05g5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.00468279, 0.449855, -0.893089, 0.00402058, 0.8931, 0.44984, 0.999981, -0.00148423, -0.00599088, -13.9873, 3.7807, 0.901794)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.502119, -0.150191, 0.851657, 0.561771, 0.692078, 0.453257, -0.657488, 0.706025, -0.263133, 10.0922, 7.02994, -1.78859)
+shadow_enabled = true
+
+[node name="sphere" parent="." instance=ExtResource("2_0p6mf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.91103, 0.684371, 6.2304)
+mass = 0.701
+gravity_scale = 2.025
+inertia = Vector3(3, 3, 3)
+linear_velocity = Vector3(1.05, 1.05, 1.05)
+angular_velocity = Vector3(0.0122173, 0.0122173, 0.0122173)
+
+[node name="MeshInstance3D" parent="sphere/CollisionShape3D" index="0"]
+material_override = SubResource("StandardMaterial3D_s6wvq")
+
+[node name="plane" parent="." instance=ExtResource("1_a75kb")]
+transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 15, -4.45518, -0.065629, 1.0753)
+
+[node name="MeshInstance3D" parent="plane/CollisionShape3D" index="0"]
+material_override = SubResource("StandardMaterial3D_edy5h")
+
+[node name="redwall" type="StaticBody3D" parent="plane"]
+transform = Transform3D(0.383382, 0, -1.59347e-05, 0, 4.43737, 0, 0.000155929, 0, 0.0173318, -0.288708, 2.71869, -0.00755113)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="plane/redwall"]
+shape = SubResource("BoxShape3D_0p6mf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="plane/redwall"]
+material_override = SubResource("StandardMaterial3D_s56ga")
+mesh = SubResource("BoxMesh_s56ga")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="SoccerNet" type="MeshInstance3D" parent="plane"]
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 2, 0, -0.0666667, 0, -2.91409e-09, -0.00461465, 0.404968, -0.46621)
+mesh = ExtResource("3_s56ga")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_0jgly")
+surface_material_override/1 = SubResource("StandardMaterial3D_gul82")
+
+[node name="purple wall" type="StaticBody3D" parent="plane"]
+transform = Transform3D(-0.276293, -8.45393e-06, -0.000684502, -3.93712e-05, 3.06228, 5.43708e-06, 0.00473398, 2.70765e-06, -0.0177753, 0.256993, 2.03116, -0.162056)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="plane/purple wall"]
+shape = SubResource("BoxShape3D_0p6mf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="plane/purple wall"]
+material_override = SubResource("StandardMaterial3D_3tav2")
+mesh = SubResource("BoxMesh_s56ga")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="greenwall" type="StaticBody3D" parent="plane"]
+transform = Transform3D(0.310837, 0, 0, 0, 2.93444, 0, 0, 0, 0.0355459, -0.0024662, 1.96722, 0.18131)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="plane/greenwall"]
+shape = SubResource("BoxShape3D_3tav2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="plane/greenwall/CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_h05g5")
+mesh = SubResource("BoxMesh_55van")
+
+[node name="Blue wall" type="StaticBody3D" parent="plane"]
+transform = Transform3D(0.288343, 0, 0, 0, 5.46515, 0, 0, 0, 0.0143085, -0.111216, 3.23258, -0.307903)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="plane/Blue wall"]
+shape = SubResource("BoxShape3D_h05g5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="plane/Blue wall/CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_55van")
+mesh = SubResource("BoxMesh_0jgly")
+
+[node name="ENDLEVEL CUBE" parent="plane" instance=ExtResource("4_s56ga")]
+transform = Transform3D(0.213095, 0, 0, 0, 2.65028, 0, 0, 0, 0.0493241, -0.00565615, 1.8914, -0.471609)
+
+[editable path="sphere"]
+[editable path="plane"]
